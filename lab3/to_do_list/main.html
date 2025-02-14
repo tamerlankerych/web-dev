@@ -28,6 +28,11 @@
             margin-bottom: 5px;
         }
 
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
         .delete-btn {
             cursor: pointer;
             background-color: #ff6961;
@@ -60,6 +65,7 @@
         var todoItem = document.createElement('li');
         todoItem.className = 'todo-item';
         todoItem.innerHTML = `
+            <input type="checkbox" onclick="toggleDone(this)">
             <span>${todoInput.value}</span>
             <button class="delete-btn" onclick="deleteTodo(this)">Delete</button>
         `;
@@ -70,8 +76,16 @@
 
     function deleteTodo(button) {
         var todoItem = button.parentElement;
-        var todoList = todoItem.parentElement;
-        todoList.removeChild(todoItem);
+        todoItem.remove();
+    }
+
+    function toggleDone(checkbox) {
+        var taskText = checkbox.nextElementSibling;
+        if (checkbox.checked) {
+            taskText.classList.add('completed');
+        } else {
+            taskText.classList.remove('completed');
+        }
     }
 </script>
 
